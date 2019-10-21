@@ -1,0 +1,44 @@
+sed 命令行选项
+-e 编辑随后的指令
+-f 跟随脚本中的文件名
+-n 阻止输入行的自动输出
+
+指令中的命令
+s/模式/替换值/   替换
+p                打印
+
+#执行多命令
+sed -e '' -e ''  filenamg 
+sed  '; ' filename
+
+#执行脚本文件
+sed -f sedScript filename
+
+#只显示匹配模式的行
+sed -n -e '/模式/p' filename
+
+
+awk '指令'  filename
+awk -f awkScript filename
+
+awk:
+将输入的每一行解释为一条记录
+将行上的每个单词（由空格或制表符分隔）解释为一个字段
+一个为多个连续的空格或制表符看做一个定界符
+
+$0:代表整个记录
+$1:表示每个输入行上的第一个字段的值
+
+awk '/MA/' filename
+只输出匹配到‘MA’的行，相当于以下命令
+sed  -n -e '/MA/p' filename
+
+-F修改分隔符（默认是空格或制表符）
+
+awk 多命令用; 分隔
+awk -F, '{print $1; print $2; print $3}' filename
+
+awk一般错误
+	没用用‘{}’ 将过程括起来
+	没用用‘''’ 将指令括起来
+	没有用‘//’将正则表达式括起来
